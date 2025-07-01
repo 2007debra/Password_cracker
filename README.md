@@ -1,0 +1,53 @@
+# Password Cracker 
+
+This project aims to use the tools Hydra and Hashcat to simulate a password cracking attack 
+
+## HYDRA ON SSH
+
+## STEP 1: SETUP UP 2 UBUNTU VMs
+
+### SERVER 1 (Attacker)
+
+Install Hydra: `sudo apt update` `sudo apt install hydra -y`
+
+Install Nmap: `sudo apt install nmap -y`
+
+### SERVER 2 (Target)
+
+Install SSH: `sudo apt update` `sudo apt install openssh-server -y`
+
+## STEP 2: CREATE TEST USER WITH WEAK PASSWORD (In Target)
+
+Command used: `sudo  adduser adminuser`
+** Password was set to: password123 **
+
+## STEP 3: START SSH SERVER
+
+Command used: `sudo systemctl start ssh` 
+
+## STEP 4: FIND TARGET VM'S IP ADDRESS (In Attacker)
+
+Find subnet of VM: `ip a`
+The  subnet was 192.168.56.101/24
+
+![using command to check ip](images/ip_a.png)
+
+Scan subnet with Nmap: `nmap -sn 192.168.56.101/24  `
+
+Scan IPs for open ports: `nmap -p 22 --open `
+
+![scanning ip](images/scanning.png)
+ 
+## STEP 5: CREATE A WORDLIST FILE
+
+Command used: `touch password.txt`
+
+The file contained a list of possible passwords
+
+![password list](images/passwords.png)
+
+## STEP 6: LAUNCH HYDRA ATTACK
+
+Command used: `hydra -l adminuser -P password.txt ssh://`
+
+![successful use of hydra](images/hydra.png)
