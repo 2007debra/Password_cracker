@@ -28,6 +28,7 @@ Command used: `sudo systemctl start ssh`
 ### STEP 4: FIND TARGET VM'S IP ADDRESS (In Attacker)
 
 Find subnet of VM: `ip a`
+
 The  subnet was 192.168.56.101/24
 
 ![using command to check ip](images/ip_a.png)
